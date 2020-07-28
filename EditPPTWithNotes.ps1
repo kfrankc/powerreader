@@ -8,7 +8,7 @@ $ppt = $Powerpoint.presentations.open($PPTPath, 2, $True, $False)
 
 $captions = Get-Content $CaptionPath
 foreach($line in $captions) {
-    $arr = $line.Split(",")
+    $arr = $line.Split(":")
     $slideNum = [int]$arr[0].Trim()
     $notes = $arr[1].Trim()
 

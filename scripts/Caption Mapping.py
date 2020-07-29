@@ -3,7 +3,7 @@
 
 import webvtt as wvt
 
-caption_path = 'scripts/test_captions.vtt'
+caption_path = 'scripts/captions.vtt'
 
 
 def get_sec(time_str):
@@ -13,10 +13,26 @@ def get_sec(time_str):
     return int(h) * 3600 + int(m) * 60 + int(s) + int(f) * 0.001
 
 
+def get_slide_timestamps():
+    slide_timestamps = []
+    current_slide = 1
+    start_time = 0
+    for caption in wvt.read(caption_path):
+        if("next slide" in caption.text.lower()):
+            slide_timestamps.append((current_slide, start_time, get_sec(caption.end)))
+            current_slide += 1
+            start_time = get_sec(caption.end)
+        if("previous slide" in caption.text.lower()):  # Have empty section if next and previous both happen
+            slide_timestamps.append((current_slide, start_time, get_sec(caption.end)))
+            current_slide = max(current_slide - 1, 1)
+            start_time = get_sec(caption.end)
+    return slide_timestamps
+
+
 # Use a test list input of (slide number, start time, end time) list of tuples
 slide_timestamp = [("1", "2", "22"), ("2", "22", "48"), ("3", "50", "80"), ("4", "80", "98")]
-for i in slide_timestamp:
-    print(i)
+# for i in slide_timestamp:
+#     print(i)
 
 
 def generate_mapping(slide_timestamp, captions):
@@ -40,17 +56,19 @@ def generate_mapping(slide_timestamp, captions):
     return mapping
 
 
-# output = generate_mapping(slide_timestamp, 'scripts/test_captions.vtt')
+# Main
+slide_timestamps = get_slide_timestamps()
+output = generate_mapping(slide_timestamps, caption_path)
 
 # Write to text file
 
-# f = open('file.txt', 'wt')
-# for key, value in output.items():
-#     f.write('{}: {}\n'.format(key, value.replace('\n', ' ')))
+f = open('file.txt', 'wt')
+for key, value in output.items():
+    f.write('{}: {}\n'.format(key, value.replace('\n', ' ')))
+f.close()
+# data = str(output)
+# f.write(data)
 # f.close()
-# # data = str(output)
-# # f.write(data)
-# # f.close()
 
 # # Exploratory
 # for caption in wvt.read('scripts/test_captions.vtt'):

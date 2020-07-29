@@ -1,0 +1,4 @@
+1: Start OK, start. OK. All right, welcome everyone. This is power reader. It's our hackathon project and we'd like to walk you through it.
+2: What is this project? The whole premise of this solution is answering this question. Why would you want to watch a 30 minute video when you can just read through it quicker? Power reader is an innovative AI solution that correlate's your transcriptions with your PowerPoint slides so you have a single document that captures what was spoken in a remote meeting.
+3: There are many benefits to why power reader can be useful for you or your teammates. First of all, it is easy to use. You simply upload your video and you receive a document that you can use to read through. It embraces 1 Microsoft. It uses the goodness from Microsoft 365 and Azure. 2/3 of the Microsoft Cloud.
+4: If you're interested, you can check out our hack box will provide the link to you soon. Thank you. OK.

@@ -3,7 +3,7 @@
 
 import webvtt as wvt
 
-caption_path = 'scripts/captions.vtt'
+caption_path = 'input/captions.vtt'
 
 
 def get_sec(time_str):
@@ -62,7 +62,7 @@ output = generate_mapping(slide_timestamps, caption_path)
 
 # Write to text file
 
-f = open('file.txt', 'wt')
+f = open('output/mappedcaptions.txt', 'wt')
 for key, value in output.items():
     f.write('{}: {}\n'.format(key, value.replace('\n', ' ')))
 f.close()
